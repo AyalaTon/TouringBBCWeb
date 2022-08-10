@@ -1,0 +1,95 @@
+<html lang="es">
+<meta http-equiv="Content-Type" 
+      content="text/html; charset=utf-8">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" ></h5>
+                <button class="btn" data-bs-target="#modalInfoJugador" data-bs-toggle="modal" data-bs-dismiss="modal">Info Jugador</button>
+                <button class="btn" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Actividades</button>
+                <button class="btn" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Familia</button>
+                <button class="btn" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Cuotas</button>
+                <button class="btn" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Pagos</button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/TouringBBC/Socios" method="post">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-1">
+                            <label for="nombre" style="vertical-align: middle; line-height: 38px; margin-left: -3px;"> Nombre: </label>
+                        </div>
+                        <div class="col-11">
+                            <input style="margin-left: 5px;" autocomplete="off" type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre..." required>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 5px;">
+                        <div class="col-1" >
+                            <label for="apellido" style="vertical-align: middle; line-height: 38px; margin-left: -3px;"> Apellido: </label>
+                        </div>
+                        <div class="col-11">
+                            <input style="margin-left: 5px;" autocomplete="off" type="text" name="apellido" id="apellido" class="form-control" placeholder="Apellido..." required>
+                        </div>
+                    </div>
+                    <div class="row"  style="margin-top: 5px;">
+                        <div class="col-1">
+                            <label for="direccion" style="vertical-align: middle; line-height: 38px; margin-left: -3px;"> Dirección: </label>
+                        </div>
+                        <div class="col-11">
+                            <input style="margin-left: 5px;" autocomplete="off" type="text" name="direccion" id="direccion" class="form-control" placeholder="Dirección..." required>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 5px;">
+                        <div class="col-1">
+                            <label for="telefono" style="vertical-align: middle; line-height: 38px; margin-left: -3px;"> Teléfono: </label>
+                        </div>
+                        <div class="col-11">
+                            <input style="margin-left: 5px;" autocomplete="off" type="text" name="telefono" id="telefono" class="form-control" placeholder="Teléfono..." required>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 5px;">
+                        <div class="col-1">
+                            <label for="cedula" style="vertical-align: middle; line-height: 38px; margin-left: -3px;"> Cédula: </label>
+                        </div>
+                        <div class="col-11">
+                            <input style="margin-left: 5px;" autocomplete="off" type="text" name="cedula" id="cedula" class="form-control" placeholder="Cédula..." required>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 5px;">
+                        <div class="col-2">
+                            <label for="fechaIngreso" style="vertical-align: middle; line-height: 38px; margin-left: -3px;"> Fecha ingreso: </label>
+                        </div>
+                        <div class="col-10">
+                            <input style="margin-left: 5px;" autocomplete="off" type="date" name="fechaIngreso" id="fechaIngreso" class="form-control" placeholder="dd/MM/aaaa..." required>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 5px;">
+                        <div class="col-2">
+                            <label for="fechaNacimiento" style="vertical-align: middle; line-height: 38px; margin-left: -3px;"> Fecha nacim: </label>
+                        </div>
+                        <div class="col-10">
+                            <input style="margin-left: 5px;" autocomplete="off" type="date" name="fechaNacimiento" id="fechaNacimiento" class="form-control" placeholder="dd/MM/aaaa..." required>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 5px;">
+                        <div class="col-1">
+                            <label for="tipo" style="vertical-align: middle; line-height: 38px; margin-left: -3px;"> Tipo: </label>
+                        </div>
+                        <div class="col-11">
+                            <select style="margin-left: 5px;" name="tipo" id="tipo" class="form-control" required>
+                                <option selected> Tipo </option>
+                                <option > </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <input style="display: none;" type="text" name="accion" id="accion" value="actualizarSocio" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <input type="submit" class="btn btn-primary" value="Actualizar"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

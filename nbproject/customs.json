@@ -1,0 +1,17 @@
+{
+    "elements": {
+        "jsp:include": {},
+        "title": {}
+    },
+    "attributes": {
+        "integrity": {
+            "context": "link"
+        },
+        "name": {
+            "context": "meta"
+        },
+        "http-equiv": {
+            "context": "meta"
+        }
+    }
+}
