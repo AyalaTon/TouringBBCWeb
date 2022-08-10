@@ -53,18 +53,12 @@
                             <div style="text-align: right; margin-top: 5px;">
                                 <input style="display: none;" type="text" name="accion" id="accion" value="altaCategoria" required>
                                 <input type="submit" name="guardar" id="guardar" class="btn btn-primary" value="guardar" onclick="
-                                        console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-                                        console.log('\'' + $('#nombre').val().trim() + '\'');
-                                        console.log($('#nombre').val().trim() === '');
                                         if($('#nombre').val().trim() === ''){
                                             $('#nombre')[0].setCustomValidity('Completa este campo');
                                             return;
                                         } else {
                                             $('#nombre')[0].setCustomValidity('');
                                         }
-                                        console.log($('#edadMin').val()-0);
-                                        console.log($('#edadMax').val()-0);
-                                        
                                         if($('#edadMin').val()-0 > $('#edadMax').val()-0){
                                             $('#edadMin')[0].setCustomValidity('La edad minima debe ser menor a la máxima');
                                             return;
@@ -74,10 +68,7 @@
                                         let array = document.querySelector('.ejemploCategorias');
                                         var arrayCategorias = JSON.parse(array.innerHTML);
                                         let invalido = false;
-                                        console.log(arrayCategorias);
                                         arrayCategorias.forEach(function (item) {
-                                            console.log(item);
-                                            console.log($('#nombre').val());
                                             if(item['nombre'].toUpperCase() === $('#nombre').val().trim().toUpperCase()){
                                                 invalido = true;
                                             }
@@ -95,26 +86,12 @@
                                                 arrayItems.push(j);
                                             }
                                             let arrayNuevo = [];
-                                            console.log('#edadMin');
-                                            console.log($('#edadMin').val()-0);
-                                            console.log('#edadMax');
-                                            console.log($('#edadMax').val()-0);
                                             for(let i = $('#edadMin').val()-0; i <= $('#edadMax').val()-0; i++){
-                                                console.log('AAAAAAAAAAAA');
                                                 arrayNuevo.push(i);
                                             }
-                                            console.log('arrayNuevo');
-                                            console.log(arrayNuevo);
-                                            console.log(jQuery.inArray(arrayNuevo[0], arrayItems));
-                                            console.log(jQuery.inArray(arrayNuevo[arrayNuevo.length-1]));
-                                            console.log(jQuery.inArray(arrayItems[0], arrayNuevo));
-                                            console.log(jQuery.inArray(arrayItems[arrayItems.length-1], arrayNuevo));
                                             if((jQuery.inArray(arrayNuevo[0], arrayItems) !== -1) || (jQuery.inArray(arrayNuevo[arrayNuevo.length-1], arrayItems) !== -1) || (jQuery.inArray(arrayItems[0], arrayNuevo) !== -1) || (jQuery.inArray(arrayItems[arrayItems.length-1], arrayNuevo) !== -1)){
-                                                console.log('ERRRRRRRRRRRRRRRRRROOOOOOOOOOOORRRRRRRRRRRRRRRR');
                                                 invalido2 = true;
                                             } else {// ERROR
-                                                console.log('COOOOOORRREEEECTOOOOO');
-    //                                            invalido = true;
                                             }
                                         });
                                         if(invalido2)
@@ -126,11 +103,9 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-6"> <!-- "style="border-color: red; border-style: solid; border-width: 3px; -->
+                    <div class="col-6">
                         <label style="text-align: center; width: 100%;" ><h2>Lista</h2></label>
-                        <!--<h1 style="text-align: center;">Tipos de socios</h1>-->
                         <div class="list-group">
-                            <!--<button style="display: none;" data-bs-toggle="modal" data-bs-target="#exampleModal" id="testeo"> </button>-->
                             <div style="overflow: auto; max-height: 70vh !important;">
                                 <table class="table table-light table-striped table-hover">
                                     <thead>
@@ -145,7 +120,6 @@
                                     if (cats != null){
                                         for (Categoria t : cats) {%>
                                         <tr data-bs-toggle="modal" data-bs-target="#accionesActividad"  onclick="
-//                                                $('#testeo').click();
                                                 $('#nombreNuevo').val('<%=t%>'); 
                                                 $('#nombreViejo').val('<%=t%>');
                                                 $('#edadMaxForm').val('<%=t.getEdadMax()%>');
@@ -159,11 +133,8 @@
                                     <%}%>
                                     </tbody>
                                 </table>
-                            </div>    
-                        <!--<ul class="list-group">-->
-                            
+                            </div>
                         </div>
-                        <!--</ul>-->
                     </div>
                 </div>
             </div>
@@ -199,9 +170,6 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                             <input type="submit" class="btn btn-primary" value="Guardar cambios" onclick="
-                                console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-                                console.log('\'' + $('#nombre').val().trim() + '\'');
-                                console.log($('#nombre').val().trim() === '');
                                 if($('#nombreNuevo').val().trim() === ''){
                                     $('#nombreNuevo')[0].setCustomValidity('Completa este campo');
                                     return;
@@ -211,11 +179,8 @@
                                 let array = document.querySelector('.ejemploCategorias');
                                 var arrayCategorias = JSON.parse(array.innerHTML);
                                 let invalido = false;
-                                console.log(arrayCategorias);
                                 arrayCategorias.forEach(function (item) {
                                     if(item['nombre'].toUpperCase() !== $('#nombreViejo').val().toUpperCase()){
-                                        console.log(item);
-                                        console.log($('#nombreNuevo').val());
                                         if(item['nombre'].toUpperCase() === $('#nombreNuevo').val().trim().toUpperCase()){
                                             invalido = true;
                                         }
@@ -227,40 +192,20 @@
                                 else
                                     $('#nombreNuevo')[0].setCustomValidity('');
                                 
-//####################################################################################################################################################################################
-                                console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
                                 let invalido2 = false;
                                 arrayCategorias.forEach(function (item) {
                                     let arrayItems = [];
-                                    console.log(item['edad-min']);
-                                    console.log(item['edad-max'] );
                                     for(let j = item['edad-min']; j <= item['edad-max']; j++){
                                         arrayItems.push(j);
                                     }
-                                    console.log('arrayItems');
-                                    console.log(arrayItems);
                                     let arrayNuevo = [];
-                                    console.log('#edadMinForm');
-                                    console.log($('#edadMinForm').val()-0);
-                                    console.log('#edadMaxForm');
-                                    console.log($('#edadMaxForm').val()-0);
                                     for(let i = $('#edadMinForm').val()-0; i <= $('#edadMaxForm').val()-0; i++){
-                                        console.log('AAAAAAAAAAAA');
                                         arrayNuevo.push(i);
                                     }
-                                    console.log('arrayNuevo');
-                                    console.log(arrayNuevo);
                                     if(item['nombre'] !== $('#nombreViejo').val()){
-                                        console.log(jQuery.inArray(arrayNuevo[0], arrayItems));
-                                        console.log(jQuery.inArray(arrayNuevo[arrayNuevo.length-1]));
-                                        console.log(jQuery.inArray(arrayItems[0], arrayNuevo));
-                                        console.log(jQuery.inArray(arrayItems[arrayItems.length-1], arrayNuevo));
                                         if((jQuery.inArray(arrayNuevo[0], arrayItems) !== -1) || (jQuery.inArray(arrayNuevo[arrayNuevo.length-1], arrayItems) !== -1) || (jQuery.inArray(arrayItems[0], arrayNuevo) !== -1) || (jQuery.inArray(arrayItems[arrayItems.length-1], arrayNuevo) !== -1)){
-                                            console.log('ERRRRRRRRRRRRRRRRRROOOOOOOOOOOORRRRRRRRRRRRRRRR');
                                             invalido2 = true;
                                         } else {// ERROR
-                                            console.log('COOOOOORRREEEECTOOOOO');
-//                                            invalido = true;
                                         }
                                     }
                                 });

@@ -29,7 +29,7 @@
                     </span>
                 </div>
                 <div class="row">
-                    <div class="col-12"> <!-- "style="border-color: red; border-style: solid; border-width: 3px; -->
+                    <div class="col-12">
                         <% List<Socio> socios = (List<Socio>) request.getAttribute("socios");%>
                         <div style="overflow: auto; max-height: 70vh !important;">
                             <table class="table table-light table-striped table-hover">
@@ -52,12 +52,8 @@
                                                         $('#direccion').val('<%=s.getDireccion()%>');
                                                         $('#telefono').val('<%=s.getTelefono()%>');
                                                         $('#cedula').val('<%=s.getCi()%>');
-
                                                         $('#formEliminar input.cedula').attr('value', '<%=s.getCi()%>' );
-
-    //                                                    $('#unico h5.eliminarSocioLabel').t('html', '¿Seguro que quiere eliminar a ?');
                                                         $('#unico h5.eliminarSocioLabel').text('¿Seguro que quiere eliminar a <%=s.getNombre()%>?');
-
                                                         $('#CISocio').val('<%=s.getCi()%>');
                                                         $('#fechaIngreso').val('<%=format.format(s.getFechaIngreso()) %>');
                                                         $('#fechaNacimiento').val('<%=format.format(s.getFechaNac()) %>');
@@ -77,19 +73,12 @@
                                     <%}%>
                                 </tbody>
                             </table>
-                        </div> 
-                                
-                        <!--<ul class="list-group">-->
-                            
-                        <!--</div>-->
-                        <!--</ul>-->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Modal -->
-        <!--  TITULOS: Informacion Jugador, Actividades, Familia, Cuotas, Pagos -->
-        <%--<jsp:include page="../components/SociosModales.html"/>--%>
         <div class="modal fade" id="detallesSocio" tabindex="-1" aria-labelledby="detallesSocio" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content ">
@@ -166,38 +155,29 @@
                                 </div>
                                 <div class="col-11">
                                     <select style="margin-left: 5px;" name="tipo" id="tipo" class="form-control" required>
-                                        <!--<option selected> Tipo </option>-->
-                                            <% List<TipoSocio> tipos = (List<TipoSocio>) request.getAttribute("tipoSocios");
-                                            if (tipos != null){
-                                                for (TipoSocio t : tipos) {%>
-                                                    <option > <%= t.getNombre() %></option>
-                                                <%}%>
+                                        <% List<TipoSocio> tipos = (List<TipoSocio>) request.getAttribute("tipoSocios");
+                                        if (tipos != null){
+                                            for (TipoSocio t : tipos) {%>
+                                                <option > <%= t.getNombre() %></option>
                                             <%}%>
+                                        <%}%>
                                     </select>
-                                    <!--<input style="margin-left: 5px;" autocomplete="off" type="datetime-local" name="tipo" id="tipo" class="form-control" placeholder="Tipo..." required>-->
                                 </div>
                             </div>
                             <input style="display: none;" type="text" name="accion" id="accion" value="actualizarSocio" required>
                             <input style="display: none;" type="text" name="paginaSocios" id="paginaSocios" value="paginaSocios" required> <!-- EVALUAR GET --> 
                         </div>
                         <div class="modal-footer">
-                            <!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>-->
                             <input type="submit" class="btn btn-primary" value="Actualizar" onclick="
                                    $('#form2').find('input[id=accion]').attr('value', 'actualizarSocio');
                                     console.log($('#form2').find('input[id=accion]').val());
-                                   
                                    "/>
-                            <input type="button" class="btn btn-primary" id="eliminarSoc" onclick="
-//                                $('#formEliminar > #cedula').attr('value',)
-//                                $('#form2').find('input[id=accion]').attr('value', 'eliminarSocio');
-//                                console.log($('#form2').find('input[id=accion]').val());
-                                                            " value="Eliminar" data-bs-toggle="modal" data-bs-target="#eliminarSocio" />
+                            <input type="button" class="btn btn-primary" id="eliminarSoc" onclick="" value="Eliminar" data-bs-toggle="modal" data-bs-target="#eliminarSocio" />
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-<!--<script type="text/javascript" src="js/sociostipo.js"></script>-->
     <!-- Modal Eliminar-->
         <div class="modal fade " id="eliminarSocio" tabindex="-1" aria-labelledby="eliminarSocioLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-md">

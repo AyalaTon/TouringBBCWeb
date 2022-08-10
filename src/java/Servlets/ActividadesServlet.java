@@ -70,7 +70,6 @@ public class ActividadesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String url = request.getRequestURL().toString();
@@ -81,20 +80,12 @@ public class ActividadesServlet extends HttpServlet {
                     
                     List<Actividad> actividades = CActividades.getActividades();
                     List<Actividad> actividadesVigentes = new ArrayList<>();
-                    
-//                    JsonArray array = new JsonArray();
                     for (Actividad gi : actividades)
                     {
                         if(gi.isVigente()){
                             actividadesVigentes.add(gi);
-//                            JsonObject obj = new JsonObject();
-//                            obj.addProperty("nombre", gi.getNombre());
-//                            obj.addProperty("cupos", gi.getCupos());
-//                            obj.addProperty("edad-max", gi.getHorarios());
-//                            array.add(obj);
                         }
                     }
-//                    request.setAttribute("jsonAct", array);
                     request.setAttribute("actividades", actividadesVigentes);
                     request.getRequestDispatcher("vistas/actividades.jsp").forward(request, response);
                     break;
@@ -127,8 +118,6 @@ public class ActividadesServlet extends HttpServlet {
                             actividadesVigentes2.add(gi);
                             JsonObject obj = new JsonObject();
                             obj.addProperty("nombre", gi.getNombre());
-//                            obj.addProperty("cupos", gi.getCupos());
-//                            obj.addProperty("edad-max", gi.getHorarios());
                             array.add(obj);
                         }
                     }
@@ -199,7 +188,6 @@ public class ActividadesServlet extends HttpServlet {
                         String dia = jsonObject.get("dia").toString().replaceAll("\"", "").trim();
                         String hora = jsonObject.get("hora").toString().replaceAll("\"", "").trim();
                         String duracion = jsonObject.get("duracion").toString().replaceAll("\"", "").trim();
-//                        String[] split2222 = jsonObject.get("ingreso").toString().replaceAll("\"", "").trim().split("-");
                         System.out.println("\n" + "HORARIO: " + dia + " " + hora + " " + duracion);
                         
                         Horario h = new Horario();
@@ -209,11 +197,8 @@ public class ActividadesServlet extends HttpServlet {
                         h.setActividad(a);
                         h.setVigente(true);
                         horarios.add(h);
-//                        Conexion.getInstance().persist(h);
-                        
                     }
                     List<Cuota> allCuotas = CCuotas.getCuotas();
-//                    List<Cuota> cuotas = new ArrayList<Cuota>();
                     
                     for( int i=0; i < objetos2.length; i++ ){
                         if(objetos2.length > 1){
@@ -233,7 +218,6 @@ public class ActividadesServlet extends HttpServlet {
                         String nombre = jsonObject.get("nombre").toString().replaceAll("\"", "").trim();
                         String monto = jsonObject.get("monto").toString().replaceAll("\"", "").trim();
                         String frecuencia = jsonObject.get("frecuencia").toString().replaceAll("\"", "").trim();
-//                        String[] split2222 = jsonObject.get("ingreso").toString().replaceAll("\"", "").trim().split("-");
                         System.out.println("\n" + "CUOTA: " + nombre + " " + monto + " " + frecuencia);
                         
                         Cuota C = null;
@@ -253,38 +237,7 @@ public class ActividadesServlet extends HttpServlet {
                     response.setHeader("Refresh","0.1; URL=\"" + url + "?accion=actividades\"");
                     break;
                 case "modificarCuota":
-//                    System.out.println("\nACTUALIZAR CUOTAAAAAAAAAAAAAAAA \n");
-//                    String nombreCuotaNuevo = request.getParameter("nombreNuevo");
-//                    String nombreCuotaViejo = request.getParameter("nombreViejo");
-//                    String descripcionNueva = request.getParameter("descripcionNueva");
-//                    String fechaNueva = request.getParameter("fechaNueva");
-//                    String montoNuevo = request.getParameter("montoNuevo");
-//                    String frecuenciaNueva = request.getParameter("frecuenciaNueva");
-//                    String actividadNueva = request.getParameter("actividadNueva");
-//                    System.out.println("\n" + fechaNueva);
-//                    String[] split = fechaNueva.split("-");
-//                    Date fechaNuevaDate = new Date(split[0] + "/" + split[1] + "/" + split[2]);
-//                    
-//                    List<Cuota> allCuotas = CCuotas.getCuotas();
-//                    Cuota C = null;
-//                    for(Cuota c : allCuotas){
-//                        if(c.getNombre().equals(nombreCuotaViejo.trim()))
-//                            C = c;
-//                    }
-//                    C.setNombre(nombreCuotaNuevo);
-//                    C.setDescripcion(descripcionNueva);
-//                    C.setMonto(Integer.parseInt(montoNuevo));
-//                    C.setFrecuencia(frecuenciaNueva);
-//                    C.setFecha(fechaNuevaDate);
-//                    if(!actividadNueva.trim().equals("Ninguna")){
-//                        C.setActividad(CSocios.findActividad(actividadNueva));
-//                    }
-//                    
-//                    Conexion.getInstance().merge(C);
-//                    Conexion.getInstance().refresh(C);
                     
-//                    request.getRequestDispatcher("vistas/cuotas.jsp").forward(request, response);
-//                    response.setHeader("Refresh","0.1; URL=\"" + url + "?accion=cuotas\"");
                     break;
             }
         } else {

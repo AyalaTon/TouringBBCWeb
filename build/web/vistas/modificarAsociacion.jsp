@@ -26,9 +26,9 @@
         <% String IDSA = (String) request.getAttribute("IDSA");%>
         <div class="bg-image" style="background-image: url('https://imgur.com/SvgFMB2.jpg'); background-position: center center; background-size:cover ; height: 120vh;">
             <div class="container">
-                <h1 style="text-align: center;">Modificar actividad asociada a <%= socio.getNombre()  + " " + socio.getApellido()%></h1> <!-- PONER SOLO ASOCIAR ACTIVIDAD (SACAR EL NOMBRE DEL USUARIO)-->
+                <h1 style="text-align: center;">Modificar actividad asociada a <%= socio.getNombre()  + " " + socio.getApellido()%></h1>
                 <div class="row">
-                    <div class="col-6" style="border: solid; border-color: black;"> <!--style="border: solid; border-color: black;"-->
+                    <div class="col-6" style="border: solid; border-color: black;">
                         <div class="row" style="margin-top: 5px;">
                             <h5 style="text-align: center;"> Socio <%= socio.getNombre()  + " " + socio.getApellido()%></h5>
                         </div>
@@ -90,15 +90,7 @@
                                                 }
                                             });
                                             if(arrayHorarios.length == 0){ // NO HA SELECCIONADO UN HORARIO, ERROR
-//                                                alert('No seleccionado horario');
-//                                                console.log('No seleccionado horario');
-//                                                this.preventDefault();
                                             } else {
-//                                                alert('SI seleccionado horario');
-                                                console.log('Datos a enviar: ');
-                                                console.log($('#actividadForm').val());
-                                                console.log(cuotaSeleccionada);
-                                                console.log(arrayHorarios);
                                                 $('<input type=hidden>').attr({
                                                     name: 'arrayHorarios[]',
                                                     value: arrayHorarios
@@ -109,7 +101,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6" style="border: solid; border-color: black;"><!--style="border: solid; border-color: black;"-->
+                    <div class="col-6" style="border: solid; border-color: black;">
                         <table class="table table-light table-striped table-hover" id="horarios" name="horarios">
                             <thead id="horariosHead" name="horariosHead">
                                 <tr>

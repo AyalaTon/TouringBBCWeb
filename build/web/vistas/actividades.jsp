@@ -36,7 +36,6 @@
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Cupos</th>
                                         <th scope="col">Horarios</th>
-                                        <!--<th scope="col">Dirección</th>-->
                                     </tr>
                                 </thead>
                                 <tbody id="tablaActividades">
@@ -50,9 +49,7 @@
                                                     $('#modificarActividad').attr('value', '<%=s.showHorarios2()%>');
                                                     $('#tablaModal > tbody'). empty();
                                                     let diasHorarios = $('#modificarActividad').val();
-                                                    console.log(diasHorarios);
                                                     const myArray = diasHorarios.split(', ');
-                                                    console.log(myArray);
                                                     $.each( myArray, function( index, value ){
                                                         const dia = value.split('(');
                                                         const horario = dia[1].split(')');

@@ -24,7 +24,7 @@
         <%}%>
                 <h1 style="text-align: center; color: white; background-color: rgb(181,31,36);">TIPOS DE SOCIOS </h1>
                 <div class="row">
-                    <div class="col-6" ><!-- "style="border-color: red; border-style: solid; border-width: 3px; -->
+                    <div class="col-6" >
                         <div class="row">
                             <form action="/TouringBBC/Socios" method="post">
                                 <div> 
@@ -49,9 +49,8 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-6"> <!-- "style="border-color: red; border-style: solid; border-width: 3px; -->
+                    <div class="col-6">
                         <label style="text-align: center; width: 100%;" ><h2>Lista</h2></label>
-                        <!--<h1 style="text-align: center;">Tipos de socios</h1>-->
                         <div class="list-group">
                             <% List<TipoSocio> tipos = (List<TipoSocio>) request.getAttribute("tipos");
                             if (tipos != null){
@@ -71,10 +70,7 @@
                                     </div>
                                 <%}%>
                             <%}%>
-                        <!--<ul class="list-group">-->
-                            
                         </div>
-                        <!--</ul>-->
                     </div>
                 </div>
             </div>
@@ -107,9 +103,7 @@
                     </form>
                 </div>
             </div>
-        </div>
-                        
-                        
+        </div>     
         <script type="text/javascript" src="js/sociostipo.js"></script>
     </body>
 </html>

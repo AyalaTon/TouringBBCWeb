@@ -46,7 +46,7 @@
                 <br>
                 <h1 style="text-align: center; color: white; background-color: rgb(181,31,36);" >Socio <%= socio.getNombre()  + " " + socio.getApellido()%></h1>
                 <div class="row">
-                    <div class="col-4"><!--style="border: solid; border-color: black;"-->
+                    <div class="col-4">
                         <form action="/TouringBBC/Socios" method="post">
                             <div class="row">
                                 <div class="col-2">
@@ -119,16 +119,12 @@
                                                 var dif = hoy.getFullYear() - fechaNuevaDate.getFullYear();
                                                 let ejemplo = document.querySelector('.ejemploCategorias');
                                                 var array = JSON.parse(ejemplo.innerHTML);
-                                                console.log(array);
                                                 var indiceCategoriaCorrespondiente = -1;
                                                 array.forEach(myFunction);
                                                 if(indiceCategoriaCorrespondiente == -1){
-//                                                    console.log(indiceCategoriaCorrespondiente);
                                                     errorCategoria();
                                                     $('#fechaNacimiento').val($('#fechaNacimientoAnterior').val());
                                                 } else {
-//                                                    console.log(indiceCategoriaCorrespondiente);
-//                                                    $('#categoriasCombo option:selected').val(indiceCategoriaCorrespondiente);
                                                     $('#categoriasCombo').prop('selectedIndex', indiceCategoriaCorrespondiente);
                                                 }
                                                 function myFunction(item, index, arr) {
@@ -169,12 +165,7 @@
                             <div style="text-align: right; margin-top: 5px;">
                                 <!--<button type="button" onclick="console.log();"> asdasdasd</button>-->
                                 <input type="submit" class="btn btn-primary" value="Actualizar" onclick="
-//                                    var player = $( '#jugador' ).val();
-//                                    console.log('¿Es jugador?: ');
-//                                    console.log(player);
-//                                    if(player === 'si'){
                                         $('#categoriaJugador').val($('#categoriasCombo option:selected').text());
-//                                    }
                                     " />
                                 <input type="button" class="btn btn-secondary" id="eliminarSoc" onclick="" data-bs-toggle="modal" data-bs-target="#eliminarSocio" value="Eliminar"/>
                             </div>
@@ -198,10 +189,6 @@
                                 <button class="nav-link" id="pagos-tab" data-bs-toggle="tab" data-bs-target="#pagos" type="button" role="tab" aria-controls="pagos" aria-selected="false">Pagos</button>
                             </li>
                         </ul>
-                        
-<!--                        
-                        }-->
-                        
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="infoJugador" role="tabpanel" aria-labelledby="infoJugador-tab">
                                 <form action="/TouringBBC/Socios" method="post" id="pasarAJugadorForm">
@@ -310,7 +297,6 @@
                                         <%} else {%>
                                             <input type="button" class="btn btn-primary" value="Pasar a jugar" name="pasarAJugador" id="pasarAJugador" onclick="
                                                     let haycategoriaDisp = false;
-                                                    
                                                     var fechaNueva = $('#fechaNacimiento').val();
                                                     var fechaNuevaDate = new Date(fechaNueva);
                                                     var hoy = new Date();
@@ -334,20 +320,14 @@
                                                         $( '#error' ).click();
                                                     }
                                                     if(haycategoriaDisp){
-                                                        // PONER UN IF SI ESTAN VACIAS LAS FECHAS O ESAS COSAS Y SU CORRESPONDIENTE MODAL SINO TODO OKAY
                                                         if($('#pasarAJugador').val() === 'Confirmar'){
                                                             $('#pasarAJugador').attr('form', 'pasarAJugadorForm');
-                                                            // PASAR TODOS LOS DATOS DEL SOCIO Y LOS NUEVOS DEL JUGADOR Y ENVIAR ESE FORM
-                                                            // SEGUIRRRRRRRRRRRRRRRRRRRRRRRRRR ACAAAAA
                                                             $('#vencimientoCedulaFormJugador').attr('value', $('#vencimientoCedula').val());
                                                             $('#vencimientoCarnetFormJugador').attr('value', $('#vencimientoCarnet').val());
                                                             $('#carnetIndexFormJugador').attr('value', $('#carnet option:selected').index());
                                                             $('#categoriaFormJugador').attr('value', $('#categoriasCombo option:selected').text());
-    //                                                        console.log($('#informacion').val());
-    //                                                        let info = $('#informacion').val();
                                                             $('#informacionFormJugador').attr('value', $('#informacion').val());
                                                             $('#pasarAJugador').removeAttr('type').attr('type', 'submit');
-    //                                                        pasarAJugadorForm
                                                         } else {
                                                             $('#informacion').removeAttr('readonly');
                                                             $('#vencimientoCedula').removeAttr('readonly');
@@ -358,7 +338,7 @@
                                                         }
                                                     }
                                                    "/>
-                                            <input type="button" class="btn btn-secondary" value="Actualizar" name="actJugador" id="actJugador" readonly="readonly"/><!-- PONER BOTON PARA PASARLO A JUGADOR EN LUGAR DE ESTE EN READONLY-->
+                                            <input type="button" class="btn btn-secondary" value="Actualizar" name="actJugador" id="actJugador" readonly="readonly"/>
                                         <%}%>
                                         <input type="text" style="display: none;" name="fechaNacimientoNueva" id="fechaNacimientoNueva" value=""  required/>
                                         <input type="text" style="display: none;" name="accion" id="accion" value="actualizarJugador"  required/>
@@ -382,16 +362,13 @@
                                             for (SocioActividad sa : actividades) {%>
                                                 <tr data-bs-toggle="modal" data-bs-target="#accionesActividad" onclick="
                                                     $('#idAct').attr('value', '<%=sa.getId()%>');
-                                                    
                                                     $('#accionesActividadLabel').text('<%= "Actividad " + sa.getActividades()%>');
                                                     $('#actividadAsociada').attr('value', '<%=sa.getActividades()%>');
                                                     $('#idSocioAct').attr('value', '<%=sa.getId()%>');
                                                     $('#modificarAsociacion').attr('value', '<%=sa.toString2()%>');
                                                     $('#tablaModal > tbody'). empty();
                                                     let diasHorarios = $('#modificarAsociacion').val();
-                                                    console.log(diasHorarios);
                                                     const myArray = diasHorarios.split(', ');
-                                                    console.log(myArray);
                                                     $.each( myArray, function( index, value ){
                                                         const dia = value.split('(');
                                                         const horario = dia[1].split(')');
@@ -446,7 +423,6 @@
                                                     <td ><%=f.getNombre()%></td>
                                                     <td><%=f.getApellido() %></td>
                                                     <td><%=format2.format(f.getFechaNac())%></td>
-                                                    <!-- ESTO HAY QUE CAMBIARLO PARA QUE SIEMPRE SE PUEDA DEJAR SELECCIONADO UNO AL MENOS EN LA FAMILIA Y NO QUE NO DEJE CAMBIARLO COMO AHORA-->
                                                     <td><input style="text-align: center;" type="checkbox" onclick='return false;'
                                                                <%if(f.getRol()) {%>
                                                                     checked
@@ -457,17 +433,13 @@
                                             <%}%>
                                     </tbody>
                                 </table>
-                                <!--<form action="/TouringBBC/Socios" method="post">-->
                                 <div style="text-align: right; margin-top: 5px;">
-<!--                                        <input type="text" style="display: none;" name="accion" id="accion" value="asociarActividad"  required/>
-                                    <input type="text" style="display: none;" name="CIJugador" id="CIJugador" value="<%=socio.getCi()%>"  required/>-->
                                     <input type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#accionesFamilia" value="Agregar..." 
                                            <%if(familia.size()>= 4){%>
                                            disabled="on"
                                            <%}%>
-                                           /> <!-- Abrir modal para seleccionar socios o para agregar nuevo y que te lleve a Alta Socio -->
+                                           />
                                 </div>
-                                <!--</form>-->
                             
                             </div>
                             <div class="tab-pane fade" id="cuotas" role="tabpanel" aria-labelledby="cuotas-tab">
@@ -488,7 +460,6 @@
                                                     <td ><%=format2.format(f.getFecha())%></td>
                                                     <td><%=f.getNombre()%></td>
                                                     <td><%=f.getDescripcion()%></td>
-                                                    <!-- ESTO HAY QUE CAMBIARLO PARA QUE SIEMPRE SE PUEDA DEJAR SELECCIONADO UNO AL MENOS EN LA FAMILIA Y NO QUE NO DEJE CAMBIARLO COMO AHORA-->
                                                     <td><%=f.getMonto()%></td>
                                                 </tr>
                                             <%}%>
@@ -576,7 +547,6 @@
                             <input type="text" style="display: none;" name="accion" id="accion" value="asociarActividad"  required/>
                             <button class="btn btn-primary" data-bs-dismiss="modal" onclick="">Modificar</button>
                             <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#eliminarActividad" onclick="
-                                        
                                     ">Eliminar</button>
                         </form>
                     </div>
@@ -612,14 +582,6 @@
                                         <%}%>
                                     <%}%>
                                 <%}%>
-                        <!--<form action="/TouringBBC/Socios" method="post">-->
-                            <!--<input type="text" style="display: none;" name="socio" id="socio" value="" required />-->
-                            <!--<input type="text" style="display: none;" name="actividadAsociada" id="actividadAsociada" value="" required />-->
-                            <!--<input type="text" style="display: none;" name="idSocioAct" id="idSocioAct" value="" required />-->
-<!--                            <input type="text" style="display: none;" name="modificarAsociacion" id="modificarAsociacion" value="" required />
-                            <input type="text" style="display: none;" name="accion" id="accion" value="agregarFamiliar"  required/>-->
-                            <!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Eliminar</button>-->
-                        <!--</form>-->
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-primary" data-bs-dismiss="modal" onclick="
@@ -747,7 +709,6 @@
                     let example = document.querySelector('.ejemploCategorias');
                     var array2 = JSON.parse(example.innerHTML);
                     var index = $('#categoriasCombo option:selected').index();
-                    console.log(array2[index]);
                     if(array2[index]['edad-min'] <= diferencia && array2[index]['edad-max'] >= diferencia){
                         $('#categoriasCombo').prop('selectedIndex', index);
                     } else {
@@ -757,14 +718,10 @@
                             }
                         });
                     }
-                    console.log(diferencia);
-                    console.log(fechaNueva);
-                    console.log(today);
                 });
             });
             function cargarTipo(){ // los tipos ya estan cargados en el select en este punto. ahora setteo el index correspondiente a el tipo del Socio
                 const text = '<%=socio.getTipo()%>';
-                console.log("El tipo es: " + text);
                 const $select = document.querySelector('#tipo');
                 const $options = Array.from($select.options);
                 const optionToSelect = $options.find(item => item.text === text);

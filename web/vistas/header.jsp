@@ -37,7 +37,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/TouringBBC/Cuotas?accion=cuotas">Cuotas</a>
                 </li>
-<!--                <li class="nav-item dropdown">
+                
+<!--            <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Categorias
                     </a>
@@ -45,7 +46,8 @@
                         <li><a class="dropdown-item" href="#">Reportes</a></li>
                         <li><a class="dropdown-item" href="/TouringBBC/Categorias?accion=categorias">Gestionar</a></li>
                     </ul>
-                </li>-->
+                </li>
+-->
                 <li class="nav-item">
                     <a class="nav-link" href="/TouringBBC/Categorias?accion=categorias">Categorias</a>
                 </li>

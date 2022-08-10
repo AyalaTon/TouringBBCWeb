@@ -6,16 +6,5 @@
 
 $(function(){
     $('#guardar').click(function(){
-//        alert('hola');
-//        console.log($('#nombre').val());
     });
 });
-
-
-
-//$(function(){
-//    $('#editarTipoSocio').click(function(){
-//        alert('hola');
-////        console.log($('#nombre').val());
-//    });
-//});

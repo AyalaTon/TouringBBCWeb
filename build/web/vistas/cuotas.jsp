@@ -27,7 +27,7 @@
                 <br>
                 <h1 style="text-align: center; color: white; background-color: rgb(181,31,36);">CUOTAS </h1>
                 <div class="row">
-                    <div class="col-4" ><!-- "style="border-color: red; border-style: solid; border-width: 3px; -->
+                    <div class="col-4" >
                         <label for="nombre" style="text-align: center; width: 100%;"><h2>Nueva</h2></label>
                         <form action="/TouringBBC/Cuotas" method="post">
                             <input style="display: none;" type="text" name="accion" id="accion" value="altaCuota" required>
@@ -101,10 +101,7 @@
                                         let array = document.querySelector('.ejemploCuotas');
                                         var arrayCuotas = JSON.parse(array.innerHTML);
                                         let invalido = false;
-                                        console.log(arrayCuotas);
                                         arrayCuotas.forEach(function (item) {
-                                            console.log(item);
-                                            console.log($('#nombreForm').val());
                                             if(item['nombre'].toUpperCase() === $('#nombreForm').val().trim().toUpperCase()){
                                                 invalido = true;
                                             }
@@ -152,27 +149,19 @@
                                                 $('#nombreViejo').val('<%=t.getNombre()%>');
                                                 $('#accionesCuotaLabel').text('Cuota <%=t.getNombre()%>');
                                                 $('#fechaNueva').val('<%=t.getFecha()%>');
-                                                console.log('<%=t.getFecha()%>');
-                                                $('#descripcionNueva').val('<%=t.getDescripcion()%>'); // textArea asi que estara mal
+                                                $('#descripcionNueva').val('<%=t.getDescripcion()%>');
                                                 $('#montoNuevo').val('<%=t.getMonto()%>');
-                                                
                                                 let actividad = '<%=t.getActividad()%>';
-                                                console.log(actividad);
                                                 if(actividad === null || actividad === 'null'){
-                                                        $('#actividadNueva').prop('selectedIndex', 0);                                                    
+                                                    $('#actividadNueva').prop('selectedIndex', 0);                                                    
                                                 } else {
                                                     $('#actividadNueva > option').each(function(index, item) {
                                                         if(actividad === item.innerHTML.trim()){
                                                             $('#actividadNueva').prop('selectedIndex', index);
                                                         }
-                                                        console.log(item.innerHTML.trim());
                                                     });
                                                 }
-                                                
                                                 let frecuencia = '<%=t.getFrecuencia()%>';
-                                                //console.log(frecuencia.toString());
-                                                console.log( frecuencia);
-                                                console.log(frecuencia.trim() === 'Mensual');
                                                 if(frecuencia.trim() === 'Mensual'){
                                                     $('#frecuenciaNueva').prop('selectedIndex', 0);
                                                 } else {
@@ -190,11 +179,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                                
-                        <!--<ul class="list-group">-->
-                            
                         </div>
-                        <!--</ul>-->
                     </div>
                 </div>
             </div>
@@ -279,11 +264,8 @@
                                 let array = document.querySelector('.ejemploCuotas');
                                 var arrayCuotas = JSON.parse(array.innerHTML);
                                 let invalido = false;
-                                console.log(arrayCuotas);
                                 arrayCuotas.forEach(function (item) {
                                     if(item['nombre'] !== $('#nombreViejo').val()){
-                                        console.log(item);
-                                        console.log($('#nombreNuevo').val());
                                         if(item['nombre'].toUpperCase() === $('#nombreNuevo').val().trim().toUpperCase()){
                                             invalido = true;
                                         }
@@ -324,16 +306,8 @@
                 }
             }
             function limpiarCampos(){
-//                $('#carnet option:selected').index();
-//                $('#categoriasCombo option:selected').text();
-//                $('#vencimientoCedula').val("");
-//                $('#nombre').val("");
-//                $('#tipo').prop('selectedIndex', 0);
-                
-                $('#nombreForm').val(""); //attr('value', '');
-//                $('#nombreFrom').attr('value', '');
+                $('#nombreForm').val("");
                 $('#fechaForm').val("");
-//                $('#fechaForm').attr('value', '');
                 $('#descripcionForm').val("");
                 $('#montoForm').val("");
                 $('#actividadForm').prop('selectedIndex', 0);                                                    

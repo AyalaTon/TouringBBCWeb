@@ -69,7 +69,6 @@ public class CuotasServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String url = request.getRequestURL().toString();
@@ -98,7 +97,6 @@ public class CuotasServlet extends HttpServlet {
                             obj.addProperty("nombre", gi.getNombre());
                             if(gi.getActividad() != null)
                                 obj.addProperty("actividad", gi.getActividad().getNombre());
-//                            obj.addProperty("frecuencia", gi.getFrecuencia());
                             array.add(obj);
                         }
                     }
@@ -125,7 +123,6 @@ public class CuotasServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
-
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String url = request.getRequestURL().toString();
@@ -188,8 +185,6 @@ public class CuotasServlet extends HttpServlet {
                     
                     Conexion.getInstance().merge(C);
                     Conexion.getInstance().refresh(C);
-                    
-//                    request.getRequestDispatcher("vistas/cuotas.jsp").forward(request, response);
                     response.setHeader("Refresh","0.1; URL=\"" + url + "?accion=cuotas\"");
                     break;
             }

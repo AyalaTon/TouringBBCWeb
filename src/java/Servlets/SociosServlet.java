@@ -5,7 +5,6 @@
  */
 package Servlets;
 
-//import BD.Conexion;
 import BD.Conexion;
 import Clases.Actividad;
 import Clases.Categoria;
@@ -21,26 +20,15 @@ import Controladores.CActividades;
 import Controladores.CCategorias;
 import Controladores.CCuotas;
 import Controladores.CSocios;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-//import BD.Singleton;
-//import org.json.simple.*;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
 import static java.lang.Integer.parseInt;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-
 import java.util.List;
-import javafx.scene.chart.PieChart.Data;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -69,33 +57,11 @@ public class SociosServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String accion = request.getParameter("accion");
                 if (accion != null) {
-//                    switch (accion) {
-//                        case "tipoSocios":
-//                            List<TipoSocio> tipos = CSocios.obtenerTiposSocios();
-////                            log("" + tipos.size());
-////                            console.log(tipos.size());
-//                            for(TipoSocio t : tipos){
-//                                System.out.println(t.getNombre());
-//                            }
-////                            request.setAttribute("tipos", tipos);
-//                            request.getRequestDispatcher("vistas/sociostipo.jsp").forward(request, response);
-//                            break;
-//                    }
+                    
                 } else {
                     request.getRequestDispatcher("vistas/inicio.jsp").forward(request, response);
                 }
     }
-//                            List<TipoSocio> tipos = new ArrayList<>();
-//                            Iterator<TipoSocio> it = Principal.tiposSocios.iterator();
-//                            Iterator<TipoSocio> it = Conexion.getInstance().getTiposSocios().iterator();
-//                            while(it.hasNext()){
-//                                TipoSocio x = it.next();
-//                                tipos.add(x);
-//                            }
-//                            TipoSocio p = new TipoSocio();
-//                            p.setNombre("pepe");
-//                            tipos.add(p);
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -110,7 +76,6 @@ public class SociosServlet extends HttpServlet {
 //        processRequest(request, response);
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-//        String url = request.getRequestURL().toString();
         String accion = request.getParameter("accion");
         String message = request.getParameter("message");
         request.setAttribute("message", message);
@@ -150,8 +115,6 @@ public class SociosServlet extends HttpServlet {
                             array.add(obj);
                         }
                     }
-//                    System.out.println(array.get(2));
-                    
                     request.setAttribute("jsonCat", array);
                     request.setAttribute("categorias", categoriasVigentes);
                     request.setAttribute("cedulasJson", allCedulasJson);
@@ -166,7 +129,6 @@ public class SociosServlet extends HttpServlet {
                     }
                     request.setAttribute("tipos", tipos);
                     request.getRequestDispatcher("vistas/sociostipo.jsp").forward(request, response);
-//                    response.setHeader("Refresh","0.150; URL=\"" + url + "?accion=tipoSocios\"");
                     break;
                 case "socios":
                     // Ver si es que se queiren ver todos los socios o solo los vigentes (Dejo en solo vigente)
@@ -185,7 +147,6 @@ public class SociosServlet extends HttpServlet {
                     request.setAttribute("socios", sociosVigentes);
                     request.setAttribute("tipoSocios", tiposSocio);
                     request.getRequestDispatcher("vistas/socios.jsp").forward(request, response);
-//                    response.setHeader("Refresh","0.150; URL=\"" + url + "?accion=tipoSocios\"");
                     break;
             }
         } else {
@@ -204,11 +165,9 @@ public class SociosServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        processRequest(request, response);
-//        response.setContentType("text/html;charset=UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String url = request.getRequestURL().toString();
-//        String message = "";
         if(request.getParameter("accion")!= null) {
             String accion = request.getParameter("accion");
             switch (accion) {
@@ -219,7 +178,6 @@ public class SociosServlet extends HttpServlet {
                     for (TipoSocio t : tipos) {
                         if(t.getNombre().equals(tipoSocio)){
                             exist = true;
-//                            message = "Error: Ya existe el tipo socio " + tipoSocio;
                             System.out.println("EXISTE: " + t.getNombre());
                             break;
                         }
@@ -228,21 +186,14 @@ public class SociosServlet extends HttpServlet {
                     if(exist == false){
                         CSocios.guardarTipoSocio(tipoSocio);
                     }
-//                    System.out.println("Mensaje: \"" + message + "\"");
-//                    request.setAttribute("message", message);
                     request.setAttribute("tipos", tipos);
-//                    request.getHeader("message=" + message);
-//                    request.getRequestDispatcher("vistas/sociostipo.jsp").forward(request, response);
                     response.setHeader("Refresh","0.1; URL=\"" + url + "?accion=tipoSocios\"");
                     ;
                     break;
                 case "eliminarTipoSocio":
                     String nombeTipoSocio = request.getParameter("nombreTipoSocio");
                     CSocios.eliminarTipoSocio(nombeTipoSocio);
-//                    response.setHeader("Refresh","0.1; URL=http://localhost:8080/TouringBBC/Socios?accion=tipoSocios");
                     response.setHeader("Refresh","0.1; URL=\"" + url + "?accion=tipoSocios\"");
-//                    response.setIntHeader("Refresh", 1);
-//                    request.getRequestDispatcher("vistas/sociostipo.jsp").forward(request, response);
                     break;
                 case "modificarTipoSocio":
                     String nombeTipoSocioNuevo = request.getParameter("nombreNuevo");
@@ -250,7 +201,6 @@ public class SociosServlet extends HttpServlet {
                     CSocios.modificarTipoSocio(nombeTipoSocioViejo, nombeTipoSocioNuevo);
                     
                     response.setHeader("Refresh","0.1; URL=\"" + url + "?accion=tipoSocios\"");
-//                    request.getRequestDispatcher("vistas/sociostipo.jsp").forward(request, response);
                     break;
                 case "activarSocio":
                     String Activar = request.getParameter("cedulaAct");
@@ -279,7 +229,6 @@ public class SociosServlet extends HttpServlet {
                     
                     Conexion.getInstance().merge(socioEliminar);
                     response.setHeader("Refresh","0.1; URL=\"" + url + "?accion=socios\"");
-//                    response.setHeader("Refresh","0.1; URL=\"" + url + "?accion=socios\"");
                     break;
                 case "pasarAJugador":
                     int JuCarnetIndex = Integer.parseInt(request.getParameter("carnetIndexFormJugador")); // 0 = salud, 1 = adolescente. 2 = niño
@@ -307,19 +256,6 @@ public class SociosServlet extends HttpServlet {
                     System.out.println("Jugador Tipo :" + sAConvertir.getTipo().getNombre());
                     System.out.println("Jugador Vigente :" + sAConvertir.isVigente());
                     
-                    
-                    
-//                    @ManyToOne
-//                    private Familia familia;
-//                    @ManyToMany(mappedBy = "socios", cascade = CascadeType.ALL)
-//                    private List<Cuota> cuotas;
-//                    @OneToMany(mappedBy = "socios")
-//                    private List<SocioActividad> actividades;
-//                    @ManyToOne
-//                    private TipoSocio tipo;
-//                    @OneToMany(mappedBy = "socio")
-//                    private List<PagoBBC> pagos;
-                    
                     Familia famSoc = sAConvertir.getFamilia();
                     TipoSocio tipoSoc = sAConvertir.getTipo();
                     List<PagoBBC> pagg = sAConvertir.getPagos();
@@ -331,7 +267,6 @@ public class SociosServlet extends HttpServlet {
                         for(int i = 0; i < socios.size(); i++){
                             if(socios.get(i).equals(sAConvertir)){
                                 socios.remove(socios.get(i));
-//                                socios.get(i).get = null;
                             }
                         }
                         Conexion.getInstance().merge(l);
@@ -345,24 +280,7 @@ public class SociosServlet extends HttpServlet {
                         g.setSocio(null);
                         Conexion.getInstance().merge(g);
                     }
-                    
-//                    Conexion.getInstance().merge(famSoc);
-                    
-//                    Conexion.getInstance().merge(sAConvertir);
-                    
-                    
-                    
-//                    System.out.println("Es un jugador lo que estoy queriendo crearrrrrr");
                     Jugador juga = new Jugador();
-//                    String nombre = sAConvertir.getNombre();
-//                    String apellido = sAConvertir.getApellido();
-//                    int ci = sAConvertir.getCi();
-//                    String dir = sAConvertir.getDireccion();
-//                    Date fechNaci = sAConvertir.getFechaNac();
-//                    String tel = sAConvertir.getTelefono();
-//                    Date fechIng = sAConvertir.getFechaIngreso();
-//                    TipoSocio tipo = sAConvertir.getTipo();
-                    
                     juga.setNombre(sAConvertir.getNombre());
                     juga.setApellido(sAConvertir.getApellido());
                     juga.setCi(sAConvertir.getCi());
@@ -379,15 +297,9 @@ public class SociosServlet extends HttpServlet {
                     sAConvertir.setFamilia(null); // CON ESTO YA DEJO AL SOCIO SIN FAMILIA
                     sAConvertir.setTipo(null); // CON ESTO YA DEJO AL SOCIO SIN TIPO
                     
-                    
-                    
                     Conexion.getInstance().merge(sAConvertir);
                     Conexion.getInstance().refresh(sAConvertir);
                     Conexion.getInstance().delete(sAConvertir);
-                    
-                    
-                    
-                    
                     
                     juga.setPlantel(CCategorias.findCategoria(JuCategoria.trim()));                  
                     String[] cortes = JuVencimientoCarnet.split("-");
@@ -415,35 +327,7 @@ public class SociosServlet extends HttpServlet {
                         g.setSocio(juga);
                         Conexion.getInstance().merge(g);
                     }    
-                    
-//                        String Scuota = request.getParameter("cuota");
-//                        if(Scuota.trim().equals("Ninguna")){
-//                            Familia fa =  new Familia();
-//                            Conexion.getInstance().persist(fa);
-//                            juga.setFamilia(fa);
-//                            juga.setRol(true);
-//                        } else {
-//                            Familia fa =  new Familia();
-//                            Conexion.getInstance().persist(fa);
-//                            juga.setFamilia(fa);
-//                            juga.setRol(true);
-//                            
-//                            Cuota ScuotaObj = null;
-//                            List<Cuota> cuotas = CSocios.getCuotas();
-//                            for(Cuota cu : cuotas){
-//                                if(cu.getNombre().equals(Scuota.trim()))
-//                                    ScuotaObj = cu;
-//                            }
-//                            //Tengo la Cuota
-//                            if(ScuotaObj.getSocios() == null){
-//                                ScuotaObj.setSocios(new ArrayList<Socio>());
-//                            }
-//                            ScuotaObj.getSocios().add(juga);
-//                            Conexion.getInstance().merge(ScuotaObj);
-//                        }
-                        
-//                        Conexion.getInstance().persist(juga);
-                        
+                   
                     response.setHeader("Refresh","0.1; URL=\"" + url + "?accion=socios\"");
                     break;
                 case "nuevoPago":
@@ -491,19 +375,7 @@ public class SociosServlet extends HttpServlet {
                     Conexion.getInstance().merge(socio2);
                     Conexion.getInstance().refresh(socio2);
                     Conexion.getInstance().refresh(cuota2);
-//                    //s.getCuotas().add( (Cuota) cbCuotas.getSelectedItem());
-//                    cbCuotas.removeItem(cbCuotas.getSelectedItem());
-//                    DefaultTableModel mdl = (DefaultTableModel) tCuotas.getModel();
-//
-//                    Object[] fila = new Object[4];
-//                    fila[0] = Conexion.sdf.format(cuota.getFecha());
-//                    fila[1] = cuota;
-//                    fila[2] = cuota.getDescripcion();
-//                    fila[3] = cuota.getMonto();
-//                    mdl.addRow(fila);
                     response.setHeader("Refresh","0.1; URL=\"" + url + "?accion=socios\"");
-                    
-                    
                     break;
                 case "actualizarSocio":
                     System.out.println("\nACTUALIZAR SOCIOOOOOOOOOOOOO \n");
@@ -516,14 +388,11 @@ public class SociosServlet extends HttpServlet {
                     String fechaNacimientoSocio = request.getParameter("fechaNacimiento");
                     String TipoSocio = request.getParameter("tipo");
                     
-                    
                     if(request.getParameter("categoriaJugador") != null && request.getParameter("categoriaJugador") != ""){
                         String catJugador = request.getParameter("categoriaJugador");
                         System.out.println("Categoria del player es: " + catJugador.trim());
                         Jugador jug = null;
                         jug = CSocios.findJugador(Integer.parseInt(cedulaSocio));
-//                        System.out.println("Jugador encontrado: " + CSocios.findJugador(Integer.parseInt(cedulaSocio)).getNombre());
-    //                    System.out.println("Categoria encontrada: " + CSocios.findCategoria(catJugador.trim()).getNombre());
                         if(jug != null) {
                             jug.setPlantel(CSocios.findCategoria(catJugador.trim()));
                             Conexion.getInstance().merge(jug);
@@ -538,37 +407,12 @@ public class SociosServlet extends HttpServlet {
                     System.out.println(fechaIngresoSocio);
                     System.out.println(fechaNacimientoSocio);
                     System.out.println(TipoSocio);
-//                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                     String[] split = fechaIngresoSocio.split("-");
-//                    Date fechaIngresoSocioDate = new Date(Integer.parseInt(split[2]), Integer.parseInt(split[1]), Integer.parseInt(split[0]));
                     Date fechaIngresoSocioDate = new Date(split[0] + "/" + split[1] + "/" + split[2]);
                     split = fechaNacimientoSocio.split("-");
-//                    Date fechaNscimientoSocioDate = new Date(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2]));
                     Date fechaNscimientoSocioDate = new Date(split[0] + "/" + split[1] + "/" + split[2]);
-//                    System.out.println(format.format(fechaIngresoSocioDate));
-//                    format.format(fechaIngresoSocioDate);
-//                    format.format(fechaNscimientoSocioDate);
                     CSocios.actualizarSocio(cedulaSocio, nombreSocio, apellidoSocio, direccionSocio, telefonoSocio, fechaIngresoSocioDate, fechaNscimientoSocioDate, TipoSocio);
-                    
-//                    request.getRequestDispatcher("vistas/inicio.jsp").forward(request, response);
-//                    if(request.getParameter("paginaSocios") != null){
-                        response.setHeader("Refresh","0.1; URL=\"" + url + "?accion=socios\"");
-//                    } else {
-//                        int CI = Integer.parseInt(request.getParameter("CISocio"));
-//                        Socio s = CSocios.findSocio(CI);
-//                        System.out.println("Socio: " + s.getNombre());
-//                        request.setAttribute("socio", s);
-//                        List<TipoSocio> tipoSocios = CSocios.obtenerTiposSocios();
-//                        request.setAttribute("tipoSocios", tipoSocios);
-//                        request.getRequestDispatcher("vistas/detallesSocio.jsp").forward(request, response);
-//                        response.setHeader("Refresh","0.1; URL=\""+ url); // SI LO HAGO POR GET FUNCIONARIA (EVALUAR)
-//                    }
-//                    String nombeTipoSocioNuevo = request.getParameter("nombreNuevo");
-//                    String nombeTipoSocioViejo = request.getParameter("nombreViejo");
-//                    CSocios.modificarTipoSocio(nombeTipoSocioViejo, nombeTipoSocioNuevo);
-                    
-//                    response.setHeader("Refresh","0.1; URL=\"" + url + "?accion=tipoSocios\"");
-//                    request.getRequestDispatcher("vistas/sociostipo.jsp").forward(request, response);
+                    response.setHeader("Refresh","0.1; URL=\"" + url + "?accion=socios\"");
                     break;
                 case "altaSocio":
                     String Snombre = request.getParameter("nombre");
@@ -593,7 +437,6 @@ public class SociosServlet extends HttpServlet {
                     String[] split222 = SfechaNacimiento.split("-");
                     Date SfechaNacimientoDate = new Date(split222[0] + "/" + split222[1] + "/" + split222[2]);
                     
-//                    Socio SS = new Socio();
                     String esJugador = request.getParameter("crearJugador");
                     System.out.println("JUGADOOOORRRRRRR" + esJugador);
                     if(esJugador.equals("si")){ // Es un Jugador
@@ -705,7 +548,6 @@ public class SociosServlet extends HttpServlet {
                     //Creo la Familia
                     Familia fa =  new Familia();
                     Conexion.getInstance().persist(fa);
-                    
                     
                     for( int i=0; i < objetos.length; i++ ){
                         if(objetos.length > 1){
@@ -824,67 +666,9 @@ public class SociosServlet extends HttpServlet {
                         
                     }
                     
-//            for (Iterator<JsonElement> it = ArraySocios.iterator(); it.hasNext();) {
-//                JsonObject pe = it.next().getAsJsonObject();
                     for(JsonObject pe : ArraySocios){
                         System.out.println("\nAAAAAAAAAAAAAAAAAA: " + pe.get("nombre"));
-//                    arrayFamilia = arrayFamilia.replaceAll("\\}", "\\]");
-                    
-//                    System.out.println(new Gson().fromJson(arrayFamilia, JsonArray.class));
                     }
-                    
-                    
-                    
-//                    System.out.println("Array modificada: " + arrayFamilia);
-//                    
-//                    JsonParser parser = new JsonParser();
-//                    JsonElement tradeElement = parser.parse(arrayFamilia);
-//                    JsonArray trade = tradeElement.getAsJsonArray();
-//                    System.out.println("asd" + trade);
-                    
-                    
-//                    JsonArray outputJsonArray = JsonParser.parseString(arrayFamilia).getAsJsonArray();
-//                    
-//                    JsonParser  parser = new JsonParser();
-//                    JsonElement elem   = parser.parse( arrayFamilia );
-//
-//                    JsonArray elemArr = elem.getAsJsonArray();
-//                    System.out.println( "array:" + elemArr);
-                    
-                    
-                    
-//                    System.out.println("Array: " + arrayFamilia);
-//                    Gson gson = new GsonBuilder().setLenient().create();
-//
-////                    JsonObject convertedObject = gson.fromJson(arrayFamilia, JsonObject.class);
-//                    JsonObject jsonObject = new JsonParser().parse(arrayFamilia).getAsJsonObject();
-//                    System.out.println("Array JSON: " + jsonObject);
-                    
-//                    JsonArray jsonArray = new JsonParser().parse(arrayFamilia).getAsJsonArray();
-//                    System.out.println("Array JSON: " + jsonArray);
-//                    JsonObject jsonObject = new JsonParser().parse(arrayFamilia).getAsJsonObject();
-////                    Assert.assertTrue(jsonObject.isJsonObject());
-//                    System.out.println("Familia JSON: " + jsonObject);
-////                    System.out.println("Familia2 JSON: " + convertedObject);
-//                    String jugador = jsonObject.get("jugador").toString();
-//                    System.out.println("Jugador: " + jugador);
-//                    jugador = jugador.substring(1, jugador.length()-1);
-//                    System.out.println("Jugador: " + jugador);
-//                    System.out.println("Jugador.length: " + jugador.length());
-////                    jugador = jugador.substring(1, jugador.length()-1);
-//                    jugador = jugador.replaceAll("\\\\", "");
-//                    System.out.println("Jugador: " + jugador);
-//                    JsonObject jsonObject2 = new JsonParser().parse(jugador).getAsJsonObject(); 
-//                    System.out.println("Familia Jugador JSON: " + jsonObject2);
-//                    System.out.println("Familia Jugador JSON categoria: " + jsonObject2.get("vencimientoCedula"));
-                    
-//                    System.out.println("Familia largo: " + arrayFamilia.length);
-//                    System.out.println("Familia[0]: " + arrayFamilia[0]);
-//                    for(String p : arrayFamilia){
-//                        System.out.println("Familia: " + p);
-//                    }
-//                    System.out.println("Familia: " + arrayFamilia[0]);
-//                    JsonArray jsonArray = (JsonArray) arrayFamilia;
                     
                     response.setHeader("Refresh","0.1; URL=\"" + url + "?accion=socios\"");
                     break;
@@ -904,8 +688,6 @@ public class SociosServlet extends HttpServlet {
                     System.out.println("Fecha nacimiento: " + s.getFechaNac());
                     System.out.println("Tipo: " + s.getTipo());
                     
-//                    List<Cuota> cuotasV = s.getCuotas();
-//                    System.out.println("\nCUOTA TAMANIO: " + cuotasV.size());
                     List<Cuota> cuotasV = new ArrayList<>();
                     if(s.getCuotas().size() > 0){
                         for(Cuota pepe : s.getCuotas()){
@@ -946,7 +728,6 @@ public class SociosServlet extends HttpServlet {
                     List<TipoSocio> tipoSocios = CSocios.obtenerTiposSocios();
                     Jugador j = null;
                     j = CSocios.findJugador(CI);
-                    //##############################################################################################################################################################
                     //AGREGAR LA FAMILIA
                     Conexion.getInstance().refresh(s.getFamilia());
                     List<Socio> familiares = s.getFamilia().getSocios();
@@ -963,7 +744,6 @@ public class SociosServlet extends HttpServlet {
                             sociosVigentes.add(so);
                     }
                     
-                    //##############################################################################################################################################################
                     JsonArray array = new JsonArray();
                     for (Categoria gi : categorias)
                     {
@@ -975,8 +755,6 @@ public class SociosServlet extends HttpServlet {
                             array.add(obj);
                         }
                     }
-//                    System.out.println(array.get(2));
-                    
                     System.out.println("El jugador es: " + j);
                     request.setAttribute("cantActividades", cantActividades);
                     request.setAttribute("jsonCat", array);
@@ -991,7 +769,7 @@ public class SociosServlet extends HttpServlet {
                     request.setAttribute("familia", familia);
                     request.getRequestDispatcher("vistas/detallesSocio.jsp").forward(request, response);
                     break;
-                case "actualizarJugador": // FALTA AGREGAR QUE ACTUALICE LA FECHA DE NACIMIENTO DEL SOCIO POR EL TEMA DE LAS CATEGORIAS
+                case "actualizarJugador":
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                     int Cedula = Integer.parseInt(request.getParameter("CIJugador"));
                     Jugador ju = CSocios.findJugador(Cedula);
@@ -1007,24 +785,7 @@ public class SociosServlet extends HttpServlet {
                     int carnet = Integer.parseInt(request.getParameter("carnetIndex"));
                     String categoria = request.getParameter("categoriasCombo");
                     String informacion = request.getParameter("informacion");
-//                    List<Categoria> AllCategorias = CSocios.getCategorias();
-//                    Categoria categoriaFinal = null;
-//                    categoriaFinal = CSocios.findCategoria(categoria);
-//                    
-//                    for(Categoria c : AllCategorias){
-////                        System.out.println("Categoria::::: " + c.getNombre() + " Lo que llega: " + categoria);
-//                        if(c.getNombre().equals(categoria)){
-////                            System.out.println("ENTROOOO");
-//                            categoriaFinal = c;
-//                            break;
-//                        } else {
-//                        }
-//                    }
-//                    System.out.println("Cedula Vence: " + format.format(venceCI));
-//                    System.out.println("Carnet Vence: " + format.format(venceCarnet));
-//                    System.out.println("Carnet tipo: " + carnet);
-//                    System.out.println("categoria: " + categoriaFinal);
-//                    System.out.println("detalles: " + informacion); 
+                    
                     ju.setVenCi(venceCI);
                     ju.setCarnetHabilitante(venceCarnet);
                     ju.setPlantel(CSocios.findCategoria(categoria));
@@ -1035,15 +796,13 @@ public class SociosServlet extends HttpServlet {
                     
                     response.setHeader("Refresh","0.1; URL=\"" + url + "?accion=socios\"");
                     break;
-                    
                 case "agregarFamiliar":
-//                     sa = CSocios.findSocioActividad(IDSA);
                     Socio socioActual = CSocios.findSocio(Integer.parseInt(request.getParameter("socio")));
                     Socio socioAAgregar = CSocios.findSocio(Integer.parseInt(request.getParameter("socioAAgregar")));
                     
-                    if(socioAAgregar.getFamilia().getSocios().size()>1){ // DEMASAIADAS DUDAS SOBRE ESTE IF PREGUNTARLE A ALGUIEN DESPUES    NO SE SI ANDA BIEN ESTO
+                    if(socioAAgregar.getFamilia().getSocios().size()>1){ // DEMASAIADAS DUDAS SOBRE ESTE IF PREGUNTARLE A ALGUIEN DESPUES NO SE SI ANDA BIEN ESTO
                                                                          // CREO QUE SI AGREGAR UN PRINCIPAL DE UNA FAMILIA A OTRA PASAN COSAS (PREGUNTAR ESO)
-                        if(socioAAgregar.getRol()){ // SI NO ME EQUIVOCO ESTE IF ES TODO AL REVEZ (Lo DEJO COMO YO CREO QUE ESSSSSSSSSSSSSSSSSS)
+                        if(socioAAgregar.getRol()){ // SI NO ME EQUIVOCO ESTE IF ES TODO AL REVEZ (Lo DEJO COMO YO CREO QUE ES)
                             if(socioAAgregar.getFamilia().getSocios().get(0) == socioAAgregar) // Si el socio 0 de su porpia familia es el mismo
                                 socioAAgregar.getFamilia().getSocios().get(1).setRol(true); // le doy rol true
                             else
@@ -1083,7 +842,6 @@ public class SociosServlet extends HttpServlet {
                         }
                         
                         sa.setCuota(cuot); // Cuota seleccionada ya setteada
-//                        socio.setA
                         List<String> horariosActividad = new ArrayList<>();
                         for(Horario p : actt.getHorarios()){
                             horariosActividad.add(p.getDia() + "," + p.getHora() + "," + p.getDuracion());
@@ -1094,7 +852,6 @@ public class SociosServlet extends HttpServlet {
                         List<String> dias = new ArrayList<>();
                         List<String> horas = new ArrayList<>();
                         for (String a : arrOfStr){ // CORTO EL STRING EN TRUE PARA QUEDARME CON LOS DIAS Y HORAS (DEBERIA LLEGARME AL MENOS UN HORAIRO )
-//                            System.out.println("TOKEN: " + a);
                             char firstChar = a.charAt(0);
                             if(firstChar == ','){
                                 a = a.replaceFirst(",", "");
@@ -1121,12 +878,10 @@ public class SociosServlet extends HttpServlet {
                         }
                         
                         sa.setHorarios(horarios); // nuevos horarios seleccionados ya settteados
-//                        Conexion.getInstance().persist(sa);
                         Conexion.getInstance().merge(sa);
                         Conexion.getInstance().refresh(sa);
                         
                         System.out.println(cuot.getNombre());
-                        
                         
                         response.setHeader("Refresh","0.1; URL=\"" + url + "?accion=socios\"");
                         break;
@@ -1135,9 +890,6 @@ public class SociosServlet extends HttpServlet {
                         SocioActividad sa = CSocios.findSocioActividad(socioActividadSeleccionada);
                         Socio socio = CSocios.findSocio(Integer.parseInt(request.getParameter("socio")));
                         String actividad = request.getParameter("actividadAsociada");
-//                        String horaiosSeleccionados = request.getParameter("modificarAsociacion");
-                        
-                        
                         System.out.println("Horarios de la SocioActividad");
                         System.out.println("Horarios de la actividad");
                         Actividad act = CSocios.findActividad(actividad);
@@ -1147,30 +899,13 @@ public class SociosServlet extends HttpServlet {
                             System.out.println(p.getDia() + "," + p.getHora() + "," + p.getDuracion());
                         }
                         
-                        
                         Actividad a = CSocios.findActividad(actividad);
                         List<Cuota> cuotas = a.getCuotas();
-//                        String[] corte = horaiosSeleccionados.split(", ");
                         List<String> listaSeleccionados = new ArrayList<>();
                         for(Horario p : sa.getHorarios()){
                             listaSeleccionados.add(p.getDia() + "," + p.getHora() + "," + p.getDuracion());
                             System.out.println(p.getDia() + "," + p.getHora() + "," + p.getDuracion());
-//                            System.out.println("\"" + p.getDia() + "-" + p.getHora() + "\"");
                         }
-                        
-//                        for(int i = 0; i < horariosActividad.size(); i++ ){    
-//                            String[] fila = horariosActividad.get(i).split(",");
-//                            if(horariosActividad.get(i) == listaSeleccionados.get(i)){
-//                                System.out.println("SIIIIIIIIIIIIIIIIIIIIIIIII");
-//                            }
-//                        }
-                        
-//                        System.out.println("Lista de los dias que ya estan seleccionados: " + horaiosSeleccionados);
-//                        for(String p : corte){
-//                            listaSeleccionados.add(p);
-//                            System.out.println("\"" + p + "\"");
-//                        }
-                        
                         request.setAttribute("horariosActiv", horariosActividad);
                         request.setAttribute("horariosSelect", listaSeleccionados);
                         request.setAttribute("IDSA", socioActividadSeleccionada);
@@ -1183,10 +918,9 @@ public class SociosServlet extends HttpServlet {
                         String cuotaSeleccionada = request.getParameter("cuotaForm");
                         String cedulaSeleccionada = request.getParameter("CISocio");
                         String horariosSeleccionados = request.getParameter("arrayHorarios[]");
-                        //############################################################################################################################################# GUARDAR LA ACTIVIDAD Y LISTOUUUUUU
                         SocioActividad sa = new  SocioActividad();
                         Actividad act = CSocios.findActividad(actividadSeleccionada.trim());
-                        sa.setActividades(act); // SOLO RECIBE UNA ACTIVIDAD (NO SE PORQUE LE PUSO "SETACTIVIDADES" EL PROGRAMADOR ANTERIOR)
+                        sa.setActividades(act); // SOLO RECIBE UNA ACTIVIDAD
                         Socio socioo = CSocios.findSocio(Integer.parseInt(cedulaSeleccionada));
                         sa.setSocios(socioo); // LA SOCIOACTIVIDAD NUEVA YA TIENE UN SOCIO SETTEADO Y UNA ACTIVIDAD EN ESTE PUNTO
                         Cuota cuot = null;
@@ -1249,7 +983,6 @@ public class SociosServlet extends HttpServlet {
                         System.out.println(" Cuota: " + cuotaSeleccionada);
                         System.out.println(" Horarios: " + horariosSeleccionados);
                         response.setHeader("Refresh","0.1; URL=\"" + url + "?accion=socios\"");
-//                        request.getRequestDispatcher("vistas/inicio.jsp").forward(request, response);
                         break;
                     } else { // ACA LLEGO DESDE EL BOTON DE NUEVA ACTIVIDAD DE LOS DETALLES DEL SOCIO
                         int cedulaSoc = Integer.parseInt(request.getParameter("CIJugador"));
@@ -1299,8 +1032,6 @@ public class SociosServlet extends HttpServlet {
                             obj.add("horarios", arrayHorarios);
                             arrayActividades.add(obj);
                         }
-//                        System.out.println(arrayActividades.get(1));
-    //                    List<Cuota> cuotas = CSocios.getCuotas();
                         request.setAttribute("arrayActividades", arrayActividades);
                         request.setAttribute("socio", soc);
                         request.setAttribute("actividades", actividadesVigentes);

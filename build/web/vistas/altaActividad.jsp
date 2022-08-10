@@ -76,8 +76,6 @@
                                             } else {
                                                 agregado = -1;
                                                 arrayCuotas.forEach(function (item, index) {
-                                                    console.log(item);
-                                                    console.log(index);
                                                     if(item['nombre'] === cuotaSelect.trim()){
                                                         arrayCuotasSelect.push(item);
                                                         $('#tablaCuotas').find('tbody')
@@ -99,7 +97,6 @@
                                                     $('#cuotas option:selected').remove();
                                                 }
                                             }
-                                            console.log(cuotaSelect.trim());
                                            ">
                                 </div>
                             </div>
@@ -152,14 +149,7 @@
                                 <input type="button" name="agregarHorario" id="agregarHorario" class="btn btn-primary" value="Agregar" onclick="
                                         let existe = false;
                                         arrayHorariosSelect.forEach(function (item, index) {
-                                            console.log(item['dia']);
-                                            console.log($('#diaModal').val());
-                                            console.log(item['hora']);
-                                            console.log($('#horaModal').val());
-                                            console.log(item['duracion']);
-                                            console.log($('#duracionModal').val());
                                             if(item['dia'] == $('#dias option:selected').text().trim() && item['hora'] == $('#hora').val() && item['duracion'] == $('#duracion').val()){
-                                                console.log('Encontrado');
                                                 existe= true;
                                             }
                                         });
@@ -184,9 +174,7 @@
                                                     hora: $('#hora').val(),
                                                     duracion: $('#duracion').val()
                                                 };
-                                                console.log('item creado:' + JSON.stringify(item));
                                                 arrayHorariosSelect.push(item);
-    //                                            arrayHorariosSelectJSON.push(item);
                                                 $('#dias').prop('selectedIndex', 0);
                                                 $('#hora').prop('value', '');
                                                 $('#duracion').prop('value', '');
@@ -219,12 +207,9 @@
                                     var actExistentes = JSON.parse(a.innerHTML);
                                     let nameRepet = false
                                     actExistentes.forEach(function(item, index){
-                                        console.log($('#nombreAct').val().toUpperCase().trim());
-                                        console.log(item['nombre'].toString().toUpperCase());
                                         if($('#nombreAct').val().toUpperCase().trim() === item['nombre'].toString().toUpperCase()){
                                             //Ya existe ese nombre
                                             nameRepet = true;
-                                            console.log('COINCIDE UNO');
                                         }
                                     });
                                     if(nameRepet){
@@ -247,9 +232,6 @@
                                         arrayHorariosSelect.forEach(function(item, index){
                                             arrayHorariosSelectJSON.push(JSON.stringify(item));
                                         });
-                                        console.log(arrayCuotasSelectJSON);
-                                        console.log(arrayHorariosSelectJSON);
-                                        
                                         $('<input type=hidden>').attr({
                                             name: 'arrayHorarios[]',
                                             value: arrayHorariosSelectJSON
@@ -299,16 +281,12 @@
                         <input type="button" class="btn btn-primary" value="Quitar" data-bs-dismiss="modal" onclick="
                             $('#tablaCuotas > tbody  > tr').each(function(index, tr) {
                                 let nombre = $(tr).find('td:first').text();
-                                console.log('asd: ' + nombre);
-                                console.log('asd2: ' + $('#nombreCuota').val());
                                 if (nombre === $('#nombreCuota').val()){
-                                    console.log('Entro');
                                     tr.remove();
                                     $('#cuotas').prepend(new Option(nombre, nombre));
                                     arrayCuotasSelect.forEach(function (item, index) {
                                         if(item['nombre'] === $('#nombreCuota').val()){
                                             arrayCuotasSelect.splice(arrayCuotasSelect.indexOf(item),1);
-                                            console.log(arrayCuotasSelect);
                                         }
                                     });
                                 }
@@ -351,24 +329,14 @@
                                 let hora = $(tr).find('td:first').next().text();
                                 let duracion = $(tr).find('td:first').next().next().text();
                                 if(dia.trim() == $('#diaModal').val().trim() && hora == $('#horaModal').val() && duracion == $('#duracionModal').val()){
-                                    console.log('coincide!!!!!!!');
                                     tr.remove();
                                     arrayHorariosSelect.forEach(function (item, index) {
-                                        console.log(item['dia']);
-                                        console.log($('#diaModal').val());
-                                        console.log(item['hora']);
-                                        console.log($('#horaModal').val());
-                                        console.log(item['duracion']);
-                                        console.log($('#duracionModal').val());
                                         if(item['dia'] == $('#diaModal').val().trim() && item['hora'] == $('#horaModal').val() && item['duracion'] == $('#duracionModal').val()){
-                                        console.log('Encontrado');
                                            arrayHorariosSelect.splice(arrayHorariosSelect.indexOf(item), 1);
                                         }
                                     });
                                 }
                             });
-                            console.log('arrayHorariosSelect');
-                            console.log(arrayHorariosSelect);
                            ">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</button>
                     </div>
@@ -430,13 +398,10 @@
                     let tr = td.closest('tr');
                     let nombreSeleccionado = $(tr).find('td:first').text();
                     $('#tablaModal > tbody'). empty();
-                    console.log(nombreSeleccionado);
                     
                     let array = document.querySelector('.ejemploCuotas');
                     var arrayCuotas = JSON.parse(array.innerHTML);
                     arrayCuotas.forEach(function (item, index) {
-                        console.log(item);
-                        console.log(index);
                         if(item['nombre'] === nombreSeleccionado.trim()){
                             $('#tablaModal').find('tbody')
                                 .append($('<tr>')
@@ -485,11 +450,6 @@
                     $('#diaModal').attr('value', diaSelect);
                     $('#horaModal').attr('value', horaSelect);
                     $('#duracionModal').attr('value', duracionSelect);
-                    
-                    console.log(diaSelect.trim());
-                    console.log(horaSelect);
-                    console.log(duracionSelect);
-                    
                 });
             });
             function limpiarCampos(){

@@ -36,8 +36,8 @@
                 <br>
                 <h1 style="text-align: center; color: white; background-color: rgb(181,31,36);">ALTA SOCIO </h1>
                 <div class="row">
-                    <div class="col-4" style=""><!--style="border: solid; border-color: black;"-->
-                        <form action="/TouringBBC/Socios" method="post" class="submitForm" id="submitForm"> <!-- onsubmit="return validate_ci($('#cedula').val());" -->
+                    <div class="col-4" style="">
+                        <form action="/TouringBBC/Socios" method="post" class="submitForm" id="submitForm">
                             <div class="row">
                                 <div class="col-2">
                                     <label for="nombre" style="vertical-align: middle; line-height: 38px; margin-left: -3px;"> Nombre: </label>
@@ -107,16 +107,12 @@
                                                     var dif = hoy.getFullYear() - fechaNuevaDate.getFullYear();
                                                     let ejemplo = document.querySelector('.ejemploCategorias');
                                                     var array = JSON.parse(ejemplo.innerHTML);
-                                                    console.log(array);
                                                     var indiceCategoriaCorrespondiente = -1;
                                                     array.forEach(myFunction);
                                                     if(indiceCategoriaCorrespondiente == -1){
-                //                                                    console.log(indiceCategoriaCorrespondiente);
                                                         errorCategoria();
                                                         $('#fechaNacimiento').val($('#fechaNacimientoAnterior').val());
                                                     } else {
-                //                                                    console.log(indiceCategoriaCorrespondiente);
-                //                                                    $('#categoriasCombo option:selected').val(indiceCategoriaCorrespondiente);
                                                         $('#categoriasCombo').prop('selectedIndex', indiceCategoriaCorrespondiente);
                                                     }
                                                     function myFunction(item, index, arr) {
@@ -446,7 +442,6 @@
                     let example = document.querySelector('.ejemploCategorias');
                     var array2 = JSON.parse(example.innerHTML);
                     var index = $('#categoriasCombo option:selected').index();
-                    console.log(array2[index]);
                     if(array2[index]['edad-min'] <= diferencia && array2[index]['edad-max'] >= diferencia){
                         $('#categoriasCombo').prop('selectedIndex', index);
                     } else {
@@ -456,9 +451,6 @@
                             }
                         });
                     }
-                    console.log(diferencia);
-                    console.log(fechaNueva);
-                    console.log(today);
                 });
             });
             function validation_digit(ci){
@@ -494,38 +486,29 @@
                 $('.submitForm').on('submit', function(event){
                     let example = document.querySelector('.cedulas');
                     var arrayCedulas = JSON.parse(example.innerHTML);
-                    console.log(arrayCedulas);
-                    console.log(clean_ci($('#cedula').val()));
                     if(!validate_ci($('#cedula').val())){
                         event.preventDefault();
                         $('#errorCedula').click();
                     } else { // Agregar IF para cuando no haya tipos de socios en el sistema
                         arrayCedulas.forEach(function callback(item, index, array) {
                             if(item['numero'] == clean_ci($('#cedula').val())){
-//                                alert(item['numero'] + ' ' + item['vigente']);
                                 if(item['vigente'] == true){ // Error ya existe ese Socio
                                     $('#errorSocioExisteLabel').text('Error, el Socio ya está ingresado en el sistema');
                                     $('#errorSocioExisteBoton').val('Aceptar');
                                     $('#errorSocioExisteBoton').removeAttr("type").attr("type", "button");
-//                                    alert('AAAAAAAAAAAAAAAAAAAAAa1');
                                     deleteLastRow = true;
                                 } else { // Preguntar si lo quiere activar de nuevo
-//                                    alert('AAAAAAAAAAAAAAAA' + $('#familiar').prop('checked'));
                                     if($('#familiar').prop('checked') == false){
                                         $('#errorSocioExisteBoton').removeAttr("type").attr("type", "submit");
                                         $('#errorSocioExisteLabel').text('El Socio ya está en el sistema ¿Activarlo?');
                                         $('#cedulaAct').attr('value', $('#cedula').val());
-//                                    alert('AAAAAAAAAAAAAAAAAAAAAa2');
                                     } else {
                                         $('#errorSocioExisteLabel').text('Error, el Socio ya está ingresado en el sistema');
                                         $('#errorSocioExisteBoton').val('Aceptar');
                                         $('#errorSocioExisteBoton').removeAttr("type").attr("type", "button");
                                         deleteLastRow = true;
-//                                        $('#tablaFamilia > tbody tr:last').remove();
-//                                    alert('AAAAAAAAAAAAAAAAAAAAAa3');
                                     }
                                 }
-//                                    alert('AAAAAAAAAAAAAAAAAAAAAa4');
                                 event.preventDefault();
                                 $('#errorSocio').click();
                                 return;
@@ -535,19 +518,9 @@
                         var jugador = $('#jugador');
                         if(jugador.prop('checked') === false && familiar.prop('checked') === false){ // Socio comun (No jugador ni familia)
                             //Crear socio simple ______ENVIAR FORM
-                                console.log('Hola1');
-                            // FUNCIONANDOOOOO############################################################################################################################################################################################################
-//                            event.preventDefault();
-//                            return;
                         } else {
                             if(jugador.prop('checked') === true && familiar.prop('checked') === true){ // Crear Jugador en la familia No enviar form sino meter todos los datos en un Array Json, en la tabla y esperar
                                 // Crear Obj Socio-Jugador y meter en el array _____NO ENVIAR FORM
-//                                $('#confirmarAlta').removeAttr('type').attr('type', 'submit'); // Hace visible el boton para confirmar el alta 
-//                                if(!arrayFamily){
-//                                    var arrayFamily = [];
-//                                    console.log('RECIEN CREADA');
-//                                }
-//                                if($('#jugador').prop('checked') === true){
                                 let cedularepetida = false;
                                     $.each(arrayFamilyJSON, function(i, item){ 
                                         if (item['cedula'] == $('#cedula').val()) { 
@@ -564,7 +537,6 @@
                                     limpiarCampos();
                                     return;
                                 } else {
-
                                     const jugador = {
                                         carnet: $('#carnet option:selected').index(),
                                         categoria: $('#categoriasCombo option:selected').text(),
@@ -600,7 +572,6 @@
                                                     .text(familiar['nacimiento'])
                                                 )
                                                 .append($('<td>')
-        //                                            .append('<input type=radio name=rol>')
                                                     .append($('<input>').attr({
                                                             type: 'radio',
                                                             name: 'rol',
@@ -616,34 +587,21 @@
                                         deleteLastRow = false;
                                     }
                                     if($('#tablaFamilia > tbody tr').length === 4){
-//                                        $('#agregarSocio').attr('readonly', true);
-//                                        alert('AAAAAAAAAAAAAAAAAAA');
                                         $('#agregarSocio').prop('disabled', true);
                                     } else {
-//                                        $('#agregarSocio').attr('readonly', false);
                                         $('#agregarSocio').prop('disabled', false);
                                     }
 
                                     $('#jugador').prop('checked', false);
                                     $('#divJugador > h3').css('background-color', 'rgb(178,146,146)');
                                     limpiarCampos();
-
-                                    console.log(arrayFamily);
-                                    console.log('Hola2');
                                     event.preventDefault();
                                     return;
                                 }
                             } else {
-                                
                                 console.log($('#jugador').prop('checked'));
                                 if ($('#jugador').prop('checked') === true){ // Crear solo jugador 
                                 //Crear Socio jugador _____ENVIAR FORM
-                                    console.log('Holaaaaaaaaaaaa');
-                            // FUNCIONANDOOOOO############################################################################################################################################################################################################
-//                                $('<input type=hidden>').attr({
-//                                    name: 'crearJugador',
-//                                    value: 'si'
-//                                }).appendTo('#submitForm');
                                     return;
                                 } else { // Solo familia chequeado
                                     let cedularepetida = false;
@@ -652,7 +610,6 @@
                                             cedularepetida =  true;
                                         }
                                     });
-                                    
                                     if (cedularepetida) {
                                         $('#errorSocioExisteLabel').text('Error, el Socio ya está ingresado en el sistema');
                                         $('#errorSocioExisteBoton').val('Aceptar');
@@ -672,7 +629,6 @@
                                             nacimiento: $('#fechaNacimiento').val(),
                                             tipo: $('#tipo').val()
                                         };
-                                        console.log(deleteLastRow);
                                         if(deleteLastRow === false){
                                             arrayFamily.push(JSON.stringify(familiar));
                                             arrayFamilyJSON.push(familiar);
@@ -691,17 +647,11 @@
                                                         .text(familiar['nacimiento'])
                                                     )
                                                     .append($('<td>')
-        //                                                .append('<input type=radio name=rol>').prop('value', $('#myTable tr').length)
                                                         .append($('<input type=radio>').attr({
                                                                 name: 'rol',
                                                                 value: $('#tablaFamilia tr').length
                                                             })
                                                         )
-        //                                            .append('<input>', {
-        //                                                    type: 'radio',
-        //                                                    name: 'rol', 
-        //                                                    value: $('#myTable tr').length
-        //                                                })
                                                     )
                                                 );
                                             $('#confirmarAlta').removeAttr('type').attr('type', 'submit'); // Hace visible el boton para confirmar el alta 
@@ -711,28 +661,16 @@
                                             deleteLastRow = false;
                                         }
                                         if($('#tablaFamilia > tbody tr').length === 4){
-//                                            $('#agregarSocio').attr('readonly', true);
                                             $('#agregarSocio').prop('disabled', true);
-//                                            alert('AAAAAAAAAAAAAAAAAAA');
                                         } else {
                                             $('#agregarSocio').prop('disabled', false);
-//                                            $('#agregarSocio').attr('readonly', false);
                                         }
                                         limpiarCampos();
-    //                                    $('#labelCuotaFamilia').css("visibility", "visible");
-    //                                    $('#cuotaFamilia').css("visibility", "visible");
-
-    //                                    cuotaFamilia
-                                        //Crear Obj Socio simple y meter en el array  _____NO ENVIAR FORM
-    //                                    $('#confirmarAlta').removeAttr('type').attr('type', 'submit'); // Hace visible el boton para confirmar el alta 
-
                                         console.log('Hola3');
                                         event.preventDefault();
                                         return;
                                     }
                                 }
-    //                            console.log('Todavia no hecho, No ejecutar nada');
-                                console.log('Hola4');
                                 event.preventDefault();
                                 return;
                             }
@@ -747,7 +685,6 @@
                         event.preventDefault();
                         return;
                     } else {
-//                    arrayFamily.push('pepeeee');
                         $('<input type=hidden>').attr({
                             name: 'familia[]',
                             value: arrayFamily
@@ -757,8 +694,6 @@
             });
             $('#jugador').change(function () {
                 if($(this).prop('checked') == true) {
-                    
-                    //comprobar que exista una categoria para el socio sino es asi darle checked == false
                     var fechaNueva = $('#fechaNacimiento').val();
                     var fechaNuevaDate = new Date(fechaNueva);
                     var hoy = new Date();
@@ -766,13 +701,11 @@
                     var dif = hoy.getFullYear() - fechaNuevaDate.getFullYear();
                     let ejemplo = document.querySelector('.ejemploCategorias');
                     var array = JSON.parse(ejemplo.innerHTML);
-                    console.log(array);
                     
                     var indiceCategoriaCorrespondiente = -1;
                     array.forEach(myFunction);
                     if(indiceCategoriaCorrespondiente == -1){
                         $('#jugador').prop('checked', false);
-                        
                         errorCategoria();
                     } else {
                         $('#categoriasCombo').prop('selectedIndex', indiceCategoriaCorrespondiente);
@@ -788,28 +721,22 @@
                     }
                 } else {
                     $('#divJugador > h3').css('background-color', 'rgb(178,146,146)');   
-                    
                 }
             });
             $('#familiar').change(function () {
                 if($(this).prop('checked') === false) {
-//                    $('#divFamiliares').css('display', 'none');   
                     $('#divFamiliares > h3').css('background-color', 'rgb(178,146,146)');
                     $('#cuota').attr('readonly', false);
                     if(arrayFamily.length >= 1){
                         $( '#eliminarFamilia' ).click();
                         $('#familiar').prop('checked', true);
                     }
-                } else {
-//                    $('#divFamiliares').css('display', 'block');   
+                } else { 
                     $('#divFamiliares > h3').css('background-color', 'rgb(181,31,36)'); 
                     $('#cuota').attr('readonly', true);
-//                    labelCuotaFamilia
                 }
             });
             function limpiarCampos(){
-//                $('#carnet option:selected').index();
-//                $('#categoriasCombo option:selected').text();
                 $('#vencimientoCarnet').val("");
                 $('#vencimientoCedula').val("");
                 $('#nombre').val("");
@@ -821,21 +748,13 @@
                 $('#fechaNacimiento').val("");
                 $('#tipo').prop('selectedIndex', 0);
             }
-//            $('#tablaFamilia input').on('change', function() {
-//                alert($('input[name=radio]:checked', '#tablaFamilia').val());
-//            });
-                $('#tablaFamilia').find("input[name='rol']:checked").val(); // Hacer estoooo xD
-                
-                $('#tablaFamilia input') // select the radio by its id
-                .change(function(){ // bind a function to the change event
-                    if( $(this).is(":checked") ){ // check if the radio is checked
-//                        alert($(this).val());
+                $('#tablaFamilia').find("input[name='rol']:checked").val();
+                $('#tablaFamilia input')
+                .change(function(){
+                    if( $(this).is(":checked") ){
                         alert($('#tablaFamilia').find("input[name='rol']:checked").val());
-//                        $('#indexPrincipal').attr('value', $(this).val());
                         $('#indexPrincipal').attr('value', $('#tablaFamilia > tbody > tr').find("td > input[name='rol']:checked").val());
                         console.log($('#tablaFamilia > tbody > tr').find("td > input[name='rol']:checked").val());
-//                        var val = $(this).val(); // retrieve the value
-                        
                     }
                 });
         </script>                                
